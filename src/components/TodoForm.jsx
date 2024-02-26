@@ -20,12 +20,17 @@ const TodoForm = () => {
   };
   return (
     <div className="form-container">
-      <form onSubmit={submitHandler}>
-        <label htmlFor="">Enter Title</label>
-        <input type="text" placeholder="Enter Title" ref={titleRef} />
+      <form onSubmit={submitHandler} className="form">
+        <label htmlFor="title">Enter Title</label>
+        <input
+          type="text"
+          id="title"
+          placeholder="Enter Title"
+          ref={titleRef}
+        />
 
-        <label htmlFor="">Enter Date</label>
-        <input type="date" min="2022-01-01" ref={dateRef} />
+        <label htmlFor="date">Enter Date</label>
+        <input type="date" id="date" min="2022-01-01" ref={dateRef} />
 
         <input type="submit" value="Add" />
       </form>

@@ -4,5 +4,7 @@ export const TodoContext = createContext({
   items: [],
   newTodoHandler: () => {},
   deleteTodoHandler: () => {},
-  //   fetchDataHandler: () => {},
+  loading: false,
+  updateTodoHandler: () => {},
+  existingTodo:{}
 });

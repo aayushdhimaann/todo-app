@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { TodoContext } from "./todo-context";
 function TodoContextProvider(props) {
   const [items, setItems] = useState([]);
-  const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [existingTodo, setExistingTodo] = useState({});
   const fetchDataHandler = async () => {
+    setLoading(true);
     const res = await fetch(
       "https://todo-ab60a-default-rtdb.firebaseio.com/todos.json"
     );
@@ -18,6 +20,7 @@ function TodoContextProvider(props) {
       });
     }
     setItems(loadedTodos);
+    setLoading(false);
   };
   useEffect(() => {
     fetchDataHandler();
@@ -44,7 +47,7 @@ function TodoContextProvider(props) {
   };
 
   const deleteTodoHandler = async (id) => {
-    console.log(id);
+    // console.log(id);
     const res = await fetch(
       `https://todo-ab60a-default-rtdb.firebaseio.com/todos/${id}.json`,
       {
@@ -55,13 +58,26 @@ function TodoContextProvider(props) {
       }
     );
     const data = await res.json();
-      fetchDataHandler()
+    fetchDataHandler();
+  };
+
+  const updateTodoHandler = async (id) => {
+    console.log(id);
+    const res = await fetch(
+      `https://todo-ab60a-default-rtdb.firebaseio.com/todos/${id}.json`
+    );
+    const data = await res.json();
+    // console.log(data);
+    setExistingTodo(data);
   };
 
   const ctxValue = {
     items,
     newTodoHandler,
     deleteTodoHandler,
+    loading,
+    updateTodoHandler,
+    existingTodo
   };
   return (
     <TodoContext.Provider value={ctxValue}>

@@ -5,10 +5,15 @@ import { TodoContext } from "../context/todo-context";
 
 const Todos = (props) => {
   const ctx = useContext(TodoContext);
+
   return (
     <div className="todo">
       <div className="left">
-        <h2>
+        <h2
+          onClick={() => {
+            ctx.updateTodoHandler(props.id);
+          }}
+        >
           {props.title} ({props.date})
         </h2>
       </div>
