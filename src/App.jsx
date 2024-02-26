@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="parent">
       <TodoForm />
-      {/* <UpdateTodo /> */}
+      {ctx.isVisible && <UpdateTodo />}
 
       {ctx.loading ? (
         <div className="loader">

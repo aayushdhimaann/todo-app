@@ -74,13 +74,23 @@
 .update{
   height: 250px;
   width: 600px;
-  background-color: red;
+  background-color: rgb(26, 25, 25);
   margin: 0px auto;
   position: absolute;
   z-index: 5;
   top: 200px;
-  /* transform: scale(1.2); */
   box-shadow: 0px 0px 10px grey;
+}
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 20;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
 }
 
 .todo{
@@ -101,6 +111,9 @@
   line-height: 60px;
   text-align: center;
   border-right: 1px solid black;
+}
+.todo .left h2{
+  cursor: pointer;
 }
 .todo .right{
   width: 120px;

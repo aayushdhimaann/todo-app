@@ -1,21 +1,26 @@
-import { useContext, useRef } from "react";
+import { useContext, useState } from "react";
 import { TodoContext } from "../context/todo-context";
 
 const UpdateTodo = () => {
-  const titleRef = useRef("");
-  const dateRef = useRef("");
+  const ctx = useContext(TodoContext);
+  const title = ctx.existingTodo.title;
+  // console.log(title);
+  const date = ctx.existingTodo.date;
+  const [newTitle, setNewTitle] = useState(title);
+  const [newDate, setNewDate] = useState(date);
   const submitHandler = (e) => {
     e.preventDefault();
     const updatedTodo = {
-      title: titleRef.current.value,
-      date: dateRef.current.value,
+      id: ctx.existingTodo.id,
+      title: newTitle,
+      date: newDate,
     };
-    console.log(updatedTodo);
+    // console.log(updatedTodo);
+    ctx.updateHandler(updatedTodo);
   };
-  const ctx = useContext(TodoContext);
 
   return (
-    <>
+    <div className="backdrop">
       <div className="update">
         <form onSubmit={submitHandler} className="form">
           <label htmlFor="title">Enter New Title</label>
@@ -23,21 +28,25 @@ const UpdateTodo = () => {
             type="text"
             id="title"
             placeholder="Enter Title"
-            value={ctx.existingTodo.title}
-            ref={titleRef}
+            value={newTitle}
+            onChange={(e) => {
+              setNewTitle(e.target.value);
+            }}
           />
           <label htmlFor="date">Enter New Date</label>
           <input
             type="date"
             id="date"
             min="2022-01-01"
-            ref={dateRef}
-            value={ctx.existingTodo.date}
+            value={newDate}
+            onChange={(e) => {
+              setNewDate(e.target.value);
+            }}
           />
           <input type="submit" value="Update" />
         </form>
       </div>
-    </>
+    </div>
   );
 };
 export default UpdateTodo;

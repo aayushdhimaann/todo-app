@@ -6,5 +6,7 @@ export const TodoContext = createContext({
   deleteTodoHandler: () => {},
   loading: false,
   updateTodoHandler: () => {},
-  existingTodo:{}
+  existingTodo: {},
+  isVisible: false,
+  updateHandler: () => {},
 });
